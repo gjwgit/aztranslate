@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Tuesday 2020-06-23 17:07:28 AEST Graham Williams>
+# Time-stamp: <Tuesday 2020-06-23 20:34:36 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
@@ -16,7 +16,7 @@
 # Setup
 # ----------------------------------------------------------------------
 
-DEFAULT_TO_LANGUAGE = "fr"
+DEFAULT_TO_LANGUAGE = "en"
 
 # Import the required libraries.
 
