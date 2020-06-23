@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-
-# Copyright (c) Microsoft Corporation. All rights reserved.
+#
+# Time-stamp: <Tuesday 2020-06-23 11:54:10 AEST Graham Williams>
+#
+# Copyright (c) Togaware Pty Ltd
 # Licensed under the MIT License.
 # Author: Graham.Williams@togaware.com
 #
@@ -9,107 +11,59 @@
 # https://github.com/MicrosoftTranslator/Text-Translation-API-V3-Python
 #
 
-print("""\
-======================
-Azure Text Translation
-======================
+from mlhub.pkg import azkey, azrequest, mlask, mlcat
 
+mlcat("Azure Text Translation", """\
 Welcome to a demo of the pre-built models for Text Translation provided
 through Azure's Cognitive Services. This service translates text between
 multiple languages.
 """)
 
-# Defaults.
-
-KEY_FILE = "private.py"
-
-subscription_key = None
-live = True
-
-# Build the REST API URLs.
-
-base_url = 'https://api.cognitive.microsofttranslator.com'
-
-path     = '/translate?api-version=3.0'
-translate_url = base_url + path
-
-path = '/languages?api-version=3.0'
-languages_url = base_url + path
+# ----------------------------------------------------------------------
+# Setup
+# ----------------------------------------------------------------------
 
 # Import the required libraries.
 
-import sys
 import os
-import requests
+import sys
 import uuid
 import json
+import requests
+
 from textwrap import fill
 
-# Prompt the user for the key and save into private.py for
-# future runs of the model. The contents of that file is:
-#
-# subscription_key = "a14d...ef24"
+# ----------------------------------------------------------------------
+# Request subscription key and location from user.
+# ----------------------------------------------------------------------
 
-key_found = os.path.isfile(KEY_FILE)
+SERVICE   = "Translator"
+KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
 
-if os.path.isfile(KEY_FILE) and os.path.getsize(KEY_FILE) != 0:
-    print("""The following file has been found and is assumed to contain an Azure Text
-Translator subscription key. We will load the file and use this information.
+key, location = azkey(KEY_FILE, SERVICE, connect="location")
 
-    """ + os.getcwd() + "/" + KEY_FILE)
-    exec(open(KEY_FILE).read())
-else:
-    print("""An Azure resource is required to access this service (and to run this
-demo). See the README for details of a free subscription. Then you can
-provide the key and the region information here.
-""")
-#If you don't have a key and want to review the canned examples rather
-#than work with the live examples, you can indeed continue simply by 
-#pressing the Enter key.
-#""")
-    sys.stdout.write("Please enter your Text Analytics subscription key []: ")
-    subscription_key = input()
+mlask(end="\n")
 
-    if len(subscription_key) > 0:
-        assert subscription_key
-        oKEY_FILE = open(KEY_FILE, "w")
-        oKEY_FILE.write("""subscription_key = "{}"
-assert subscription_key
-    """.format(subscription_key))
-        oKEY_FILE.close()
-
-        print("""
-I've saved that information into the file:
-
-""" + os.getcwd() + "/" + KEY_FILE)
-
-# Handle canned demonstration.
-    
-# if len(subscription_key) == 0:
-#     live = False
-#     with open(CANNED_PKL, 'rb') as f:
-#         languages, sentiments, key_phrases, entities = pickle.load(f)
-#     sys.stdout.write("""
-# No subscription key was provided so we will continue with a canned
-# demonstration. The analyses from the cloud through the API have previously
-# been captured and so we will use them.
-# """)
-    
-sys.stdout.write("""
-Press Enter to continue: """)
-answer = input()
+# ----------------------------------------------------------------------
+# Prepare to send requests to the service.
+# ----------------------------------------------------------------------
 
 headers  = {
-    'Ocp-Apim-Subscription-Key': subscription_key,
+    'Ocp-Apim-Subscription-Key': key,
+    'Ocp-Apim-Subscription-Region': location,
     'Content-type': 'application/json',
     'X-ClientTraceId': str(uuid.uuid4())
 }  
 
-print("""
-===================
-Supported Languages
-===================
+endpoint      = 'https://api.cognitive.microsofttranslator.com/'
+path          = '/translate?api-version=3.0'
+translate_url = endpoint + path
 
+endpoint      = 'https://api.cognitive.microsofttranslator.com/'
+path          = '/languages?api-version=3.0'
+languages_url = endpoint + path
+
+mlcat("Supported Languages", """\
 These are the languages supported by the Azure Translator for translation.
 """)
 
@@ -117,33 +71,26 @@ response = requests.get(languages_url, headers=headers)
 response = response.json()
 translations = response['translation']
 
-count = 1
+count = 1 # For lines per page.
 for l in translations:
     if count%20 == 0:
-        sys.stdout.write("""
-Press Enter to continue: """)
-        answer = input()
-        print()
+        mlask(begin="\n", end="\n")
     t = translations[l]
-    print("{:7} {} {:25} {:25}".format(l, t['dir'], t['name'], t['nativeName']))
+    print(f"{l:8} {t['dir']} {t['name']:25} {t['nativeName']:25}")
     count += 1
 
-print("""
-That's {} languages in total.""".format(count))
+mlcat("", f"""\
+That's {count} languages in total.
+""", begin="\n")
 
-sys.stdout.write("""
-Press Enter to continue on to translations from English: """)
-answer = input()
+mlask(end="\n")
 
-print("""
-=============================
-Text Translation from English
-=============================
-
+mlcat("Text Translation from English", """\
 Below we demonstrate the translation of a variety of common phrases as we might
-find when interacting with a voice command system.""")
+find when interacting with a voice command system.
+""")
 
-utterances = [{ 'text': """
+utterances = [{ 'text': """\
     Hi Tom, has my parcel arrived yet?
     Where is a good shop to buy mobile phones?
     Has Frederick replied to my email yet?
@@ -152,52 +99,45 @@ utterances = [{ 'text': """
     When is a good time to meet Susan and Dave?
 """}]
 
-print(utterances[0]['text'])
+print("\n" + utterances[0]['text'])
     
-if live:
-    params   = '&to=de&to=it&to=id&to=hi'
-    request = requests.post(translate_url + params, headers=headers, json=utterances)
-    response = request.json()
+params   = '&to=de&to=it&to=id&to=hi'
+request = requests.post(translate_url + params, headers=headers, json=utterances)
+response = request.json()
 
-    lang  = response[0]['detectedLanguage']
-    trans = response[0]['translations']
+lang  = response[0]['detectedLanguage']
+trans = response[0]['translations']
 
-print("The supplied text was detected as '{}' with a score of '{}'.".
-      format(lang['language'], lang['score']))
+mlcat("", f"""
+The supplied text was detected as '{lang['language']}' with a 
+score of '{lang['score']}'.""")
 
 for t in trans:
-    sys.stdout.write("""
-Press Enter for a translation to {}: """.format(translations[t['to']]['name']))
-    answer = input()
+    mlask(f"Press Enter for a translation to {translations[t['to']]['name']}",
+          begin="\n", end="\n")
     sys.stdout.write(t['text'])
 
-sys.stdout.write("""
-Press Enter to continue on to translations back to English: """)
-answer = input()
+mlask("Press Enter to continue on to translations back to English", begin="\n", end="\n")
 
-print("""
-===========================
-Translation back to English
-===========================
-
+mlcat("Translation back to English", """\
 Below we translate each of the above translations back to English. Again the 
 source language is automatically identified.
 
-Here's a reminder of the original English utterances:""")
+Here's a reminder of the original English utterances:
+""")
 
-print(utterances[0]['text'])
+print(utterances[0]['text'][:-1]) # Remove final \n.
 
-if live:
-    params   = '&to=en'
-    request = requests.post(translate_url + params, headers=headers, json=trans)
-    reverse = request.json()
+params   = '&to=en'
+request = requests.post(translate_url + params, headers=headers, json=trans)
+reverse = request.json()
 
 for t in reverse:
     lang  = t['detectedLanguage']
     trans = t['translations']
-    sys.stdout.write("""
-Press Enter for the translation from {} (language id score={}): """.
-                     format(translations[lang['language']]['name'],
-                            lang['score']))
-    answer = input()
+    mlask(f"Press Enter for the translation from " +
+          f"{translations[lang['language']]['name']} " +
+          f"(language id score={lang['score']})", begin="\n", end="\n")
     sys.stdout.write(trans[0]['text'])
+
+print()
