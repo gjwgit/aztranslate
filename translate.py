@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Tuesday 2020-06-23 16:36:25 AEST Graham Williams>
+# Time-stamp: <Tuesday 2020-06-23 16:47:01 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
@@ -26,8 +26,6 @@ import uuid
 import json
 import argparse
 import requests
-
-from textwrap import fill
 
 from mlhub.pkg import azkey, is_url
 from mlhub.utils import get_cmd_cwd
