@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Tuesday 2020-06-23 13:06:48 AEST Graham Williams>
+# Time-stamp: <Tuesday 2020-06-23 13:40:13 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
@@ -104,7 +104,7 @@ utterances = [{ 'text': """\
 
 print("\n" + utterances[0]['text'])
     
-params   = '&to=de&to=it&to=id&to=hi'
+params   = '&to=de&to=it&to=fr&to=id&to=hi&to=ar&to=th&to=zh-Hant'
 request = requests.post(translate_url + params, headers=headers, json=utterances)
 response = request.json()
 
