@@ -1,159 +1,122 @@
 # -*- coding: utf-8 -*-
-
-# Copyright (c) Microsoft Corporation. All rights reserved.
+#
+# Time-stamp: <Tuesday 2020-06-23 16:36:25 AEST Graham Williams>
+#
+# Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
 # Author: Graham.Williams@togaware.com
 #
-# This demo is based on the Azure Cognitive Services Translator Quick Starts
+# Command line tool for translation.
+#
+# ml translate aztranslate --to=fr [--path=<path>] <sentence>
 # 
 # https://github.com/MicrosoftTranslator/Text-Translation-API-V3-Python
-#
 
-print("""================================
-Azure Text Translation to English
-=================================
-""")
+# ----------------------------------------------------------------------
+# Setup
+# ----------------------------------------------------------------------
 
-# Defaults.
-
-KEY_FILE = "private.py"
-
-subscription_key = None
-live = True
-
-# Build the REST API URLs.
-
-base_url = 'https://api.cognitive.microsofttranslator.com'
-#base_url = 'https://translator-for-mlhub.cognitiveservices.azure.com'
-base_url = 'https://australiaeast.api.cognitive.microsoft.com'
-
-path     = '/translate?api-version=3.0'
-translate_url = base_url + path
-
-path = '/languages?api-version=3.0'
-languages_url = base_url + path
+DEFAULT_TO_LANGUAGE = "fr"
 
 # Import the required libraries.
 
-import sys
 import os
-import requests
+import sys
 import uuid
 import json
+import argparse
+import requests
+
 from textwrap import fill
 
-# Prompt the user for the key and save into private.py for
-# future runs of the model. The contents of that file is:
-#
-# subscription_key = "a14d...ef24"
+from mlhub.pkg import azkey, is_url
+from mlhub.utils import get_cmd_cwd
 
-key_found = os.path.isfile(KEY_FILE)
+# ----------------------------------------------------------------------
+# Parse command line arguments
+# ----------------------------------------------------------------------
 
-if os.path.isfile(KEY_FILE) and os.path.getsize(KEY_FILE) != 0:
-    print("""The following file has been found and is assumed to contain an Azure Text
-Translator subscription key. We will load the file and use this information.
+option_parser = argparse.ArgumentParser(add_help=False)
 
-    """ + os.getcwd() + "/" + KEY_FILE)
-    exec(open(KEY_FILE).read())
-else:
-    print("""An Azure resource is required to access this service (and to run this
-demo). See the README for details of a free subscription. Then you can
-provide the key and the region information here.
-""")
-#If you don't have a key and want to review the canned examples rather
-#than work with the live examples, you can indeed continue simply by 
-#pressing the Enter key.
-#""")
-    sys.stdout.write("Please enter your Text Analytics subscription key []: ")
-    subscription_key = input()
+option_parser.add_argument(
+    'sentence',
+    nargs="*",
+    help='text to translate')
 
-    if len(subscription_key) > 0:
-        assert subscription_key
-        oKEY_FILE = open(KEY_FILE, "w")
-        oKEY_FILE.write("""subscription_key = "{}"
-assert subscription_key
-    """.format(subscription_key))
-        oKEY_FILE.close()
+option_parser.add_argument(
+    '--path', '-p',
+    help='path to a text file')
 
-        print("""
-I've saved that information into the file:
+option_parser.add_argument(
+    '--to', "-t",
+    help=f'destination language ({DEFAULT_TO_LANGUAGE})')
 
-""" + os.getcwd() + "/" + KEY_FILE)
+args = option_parser.parse_args()
 
-# Handle canned demonstration.
-    
-# if len(subscription_key) == 0:
-#     live = False
-#     with open(CANNED_PKL, 'rb') as f:
-#         languages, sentiments, key_phrases, entities = pickle.load(f)
-#     sys.stdout.write("""
-# No subscription key was provided so we will continue with a canned
-# demonstration. The analyses from the cloud through the API have previously
-# been captured and so we will use them.
-# """)
-    
+if args.to is None: args.to = DEFAULT_TO_LANGUAGE
+
+# ----------------------------------------------------------------------
+# Request subscription key and location from user.
+# ----------------------------------------------------------------------
+
+SERVICE   = "Translator"
+KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+
+key, location = azkey(KEY_FILE, SERVICE, connect="location", verbose=False)
+
 headers  = {
-    'Ocp-Apim-Subscription-Key': subscription_key,
+    'Ocp-Apim-Subscription-Key': key,
+    'Ocp-Apim-Subscription-Region': location,
     'Content-type': 'application/json',
     'X-ClientTraceId': str(uuid.uuid4())
 }  
 
-print("""
-Enter a line of text in any language and we'll attempt to translate it to English.
+endpoint      = 'https://api.cognitive.microsofttranslator.com/'
+path          = '/translate?api-version=3.0'
+translate_url = endpoint + path
 
-Exit when no text supplied.
-""")
-      
+# ----------------------------------------------------------------------
+# Read the text to be translated.
+# ----------------------------------------------------------------------
 
-while True:
-    
-    print("> ", end="")
-
-    text = input()
-
-    if len(text) == 0: break
-    
-    smpl = [{'text': text}]
-
-    params   = '&to=en'
-    request = requests.post(translate_url + params, headers=headers, json=smpl)
-    smpl_en = request.json()
-
-    sys.stdout.write("""
-The text was identified as {} with {}% certainty:
-    
-  {}: {}
-
-""".format(smpl_en[0]['detectedLanguage']['language'],
-           round(100*smpl_en[0]['detectedLanguage']['score']),
-           smpl_en[0]['translations'][0]['to'],
-           smpl_en[0]['translations'][0]['text']))
-
-
-# sys.stdout.write(fill(hof_fr[0]['translations'][0]['text']))
-
-# sys.stdout.write("""
-
-# *** Translating back to English demonstrates a shallow understanding:
-
-# """)
-
-# if live:
-#     params   = '&to=en'
-#     request = requests.post(translate_url + params, headers=headers, json=hof_fr[0]['translations'])
-#     hof_en = request.json()
-
-# sys.stdout.write(fill(hof_en[0]['translations'][0]['text']))
+# print("sentence =>", args.sentence)
+# print("path =>", args.path)
+# print("to =>", args.to)
+# print()
+text = " ".join(args.sentence)
+# print("text =>", text)
 # print()
 
-# # Google had: 
-# #
-# #     Dans leur maison, tout vient en paires. Il y a sa voiture et sa
-# #     voiture, ses serviettes et ses serviettes, sa bibliothèque et
-# #     les siennes.
-# #
-# #     Then
-# #
-# #     At home, they have everything in double. There is his own car
-# #     and his own car, his own towels and his own towels, his own
-# #     library and his own library.
+# ----------------------------------------------------------------------
+# Support function to translate the text.
+# ----------------------------------------------------------------------
+
+def translate(text, to):
+    json   = [{'text': text}]
+    params = f'&to={to}'
+    result = requests.post(translate_url + params, headers=headers, json=json)
+    result = result.json()
+
+    sys.stdout.write(f"{result[0]['detectedLanguage']['language']}," +
+                     f"{result[0]['detectedLanguage']['score']}," +
+                     f"{result[0]['translations'][0]['to']}," +
+                     f"{result[0]['translations'][0]['text']}")
+    sys.stdout.flush()
+
+# ----------------------------------------------------------------------
+# Translate the text.
+# ----------------------------------------------------------------------
+
+if len(text):
+    translate(text, args.to)
+    print()
+else:
+    if sys.stdin.isatty():
+        try:
+            for line in sys.stdin:
+                translate(line, args.to)
+        except KeyboardInterrupt:
+            pass
+    else:
+        for line in sys.stdin.readlines():
+            translate(line, args.to)
