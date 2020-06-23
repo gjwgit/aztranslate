@@ -269,7 +269,7 @@ Press Enter for the translation from Hindi (language id score=0.97):
 
 To use the model to translate user provided text:
 
-  $ ml do aztranslate
+  $ ml translate aztranslate
 ```
 
 Interactive Use
@@ -281,46 +281,15 @@ variability of the competency of the translation. Translation from the
 Indonesian language is not as well developed as other languages!
 
 ```console
-$ ml do aztranslate
-================================
-Azure Text Translation to English
-=================================
+$ ml translate aztranslate सभी मनुष्यों को गौरव और अधिकारों के मामले में जन्मजात स्वतन्त्रता और समानता प्राप्त है। उन्हें बुद्धि और अन्तरात्मा की देन प्राप्त है और परस्पर उन्हें भाईचारे के भाव से बर्ताव करना चाहिये।
+hi,1.0,en,All human beings have innate freedom and equality in terms of pride and rights. They have the wisdom and the conscience and they should behave in a sense of brotherhood.
 
-The following file has been found and is assumed to contain an Azure Text
-Translator subscription key. We will load the file and use this information.
+$ ml translate aztranslate C’est l’exception qui confirme la règle.
+fr,1.0,en,This is the exception that confirms the rule.
 
-    /home/gjw/.mlhub/aztranslate/private.py
+$ ml translate aztranslate Dimana ada kemauan, di situ ada jalan
+id,1.0,en,Where there is a will, there is a way
 
-Enter a line of text in any language and we'll attempt to translate it to English.
-
-Exit when no text supplied.
-
-> सभी मनुष्यों को गौरव और अधिकारों के मामले में जन्मजात स्वतन्त्रता और समानता प्राप्त है। उन्हें
-> बुद्धि और अन्तरात्मा की देन प्राप्त है और परस्पर उन्हें भाईचारे के भाव से बर्ताव करना चाहिये।
-
-The text was identified as Hindi with 100% certainty:
-    
-  English: All human beings have inherent freedom and equality in 
-  terms of pride and rights. They have the wisdom and the conscience,
-  and they must behave in a spirit of brotherhood.
-
-> C’est l’exception qui confirme la règle.
-
-The text was identified as French with 100% certainty:
-    
-  English: This is the exception that confirms the rule.
-
-> Dimana ada kemauan, di situ ada jalan
-
-The text was identified as Indonesian with 100% certainty:
-    
-  English: Where there's a will, there is no way
-
-> 
-
-To explore limitations of translations:
-
-  $ ml limits aztranslate
 ```
 
 Limitations of Translations
