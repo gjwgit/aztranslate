@@ -35,7 +35,7 @@ Usage
 		$ ml install   aztranslate
 		$ ml configure aztranslate
 		$ ml demo      aztranslate
-		$ ml do        aztranslate
+		$ ml translate aztranslate
 		$ ml limits    aztranslate
 
 Demonstration
