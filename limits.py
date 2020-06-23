@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Tuesday 2020-06-23 13:32:06 AEST Graham Williams>
+# Time-stamp: <Tuesday 2020-06-23 17:08:06 AEST Graham Williams>
 #
 # Copyright (c) TogawarePty Ltd. All rights reserved.
 # Licensed under the MIT License.
@@ -39,7 +39,6 @@ demonstrate using Azure Translator.
 
 import os
 import sys
-import uuid
 import json
 import requests
 
@@ -64,7 +63,6 @@ headers  = {
     'Ocp-Apim-Subscription-Key': key,
     'Ocp-Apim-Subscription-Region': location,
     'Content-type': 'application/json',
-    'X-ClientTraceId': str(uuid.uuid4())
 }  
 
 endpoint      = 'https://api.cognitive.microsofttranslator.com/'

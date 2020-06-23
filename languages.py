@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Tuesday 2020-06-23 16:48:58 AEST Graham Williams>
+# Time-stamp: <Tuesday 2020-06-23 17:07:41 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
@@ -21,7 +21,6 @@
 
 import os
 import sys
-import uuid
 import json
 import requests
 
@@ -40,7 +39,6 @@ headers  = {
     'Ocp-Apim-Subscription-Key': key,
     'Ocp-Apim-Subscription-Region': location,
     'Content-type': 'application/json',
-    'X-ClientTraceId': str(uuid.uuid4())
 }  
 
 endpoint      = 'https://api.cognitive.microsofttranslator.com/'
