@@ -11,12 +11,12 @@ meta:
 dependencies:
   pip3: requests, uuid
   files:
-    - https://mlhub.ai/empty.txt: private.py
+    - https://mlhub.ai/empty.txt: private.txt
     - README.md
     - demo.py
     - limits.py
-    - do.py
+    - translate.py
 commands:
-  demo    : Demonstrate the functionality of text translator.
-  limits  : Discuss limitations of deep learning with shallow AI.
-  do      : Use the model to translate user provided text.
+  demo      : Demonstrate the functionality of text translator.
+  limits    : Discuss limitations of deep learning with shallow AI.
+  translate : Use the model to translate user provided text.
