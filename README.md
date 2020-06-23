@@ -29,6 +29,7 @@ Quickstart
 ```console
 $ ml translate aztranslate Hello world
 $ ml languages aztranslate
+$ ml limits aztranslate
 ```
 
 Usage
