@@ -64,80 +64,90 @@ Supported Languages
 
 These are the languages supported by the Azure Translator for translation.
 
-af      ltr Afrikaans                 Afrikaans                
-ar      rtl Arabic                    العربية                  
-bg      ltr Bulgarian                 Български                
-bn      ltr Bangla                    বাংলা                    
-bs      ltr Bosnian                   bosanski (latinica)      
-ca      ltr Catalan                   Català                   
-cs      ltr Czech                     Čeština                  
-cy      ltr Welsh                     Welsh                    
-da      ltr Danish                    Dansk                    
-de      ltr German                    Deutsch                  
-el      ltr Greek                     Ελληνικά                 
-en      ltr English                   English                  
-es      ltr Spanish                   Español                  
-et      ltr Estonian                  Eesti                    
-fa      rtl Persian                   Persian                  
-fi      ltr Finnish                   Suomi                    
-fil     ltr Filipino                  Filipino                 
-fj      ltr Fijian                    Fijian                   
-fr      ltr French                    Français                 
+af       ltr Afrikaans                 Afrikaans                
+ar       rtl Arabic                    العربية                  
+bg       ltr Bulgarian                 Български                
+bn       ltr Bangla                    বাংলা                    
+bs       ltr Bosnian                   bosanski (latinica)      
+ca       ltr Catalan                   Català                   
+cs       ltr Czech                     Čeština                  
+cy       ltr Welsh                     Welsh                    
+da       ltr Danish                    Dansk                    
+de       ltr German                    Deutsch                  
+el       ltr Greek                     Ελληνικά                 
+en       ltr English                   English                  
+es       ltr Spanish                   Español                  
+et       ltr Estonian                  Eesti                    
+fa       rtl Persian                   Persian                  
+fi       ltr Finnish                   Suomi                    
+fil      ltr Filipino                  Filipino                 
+fj       ltr Fijian                    Fijian                   
+fr       ltr French                    Français                 
 
 Press Enter to continue: 
 
-he      rtl Hebrew                    עברית                    
-hi      ltr Hindi                     हिंदी                    
-hr      ltr Croatian                  Hrvatski                 
-ht      ltr Haitian Creole            Haitian Creole           
-hu      ltr Hungarian                 Magyar                   
-id      ltr Indonesian                Indonesia                
-is      ltr Icelandic                 Íslenska                 
-It      ltr Italian                   Italiano                 
-ja      ltr Japanese                  日本語                      
-ko      ltr Korean                    한국어                      
-lt      ltr Lithuanian                Lietuvių                 
-lv      ltr Latvian                   Latviešu                 
-mg      ltr Malagasy                  Malagasy                 
-ms      ltr Malay                     Melayu                   
-mt      ltr Maltese                   Il-Malti                 
-mww     ltr Hmong Daw                 Hmong Daw                
-nb      ltr Norwegian                 Norsk                    
-nl      ltr Dutch                     Nederlands               
-otq     ltr Querétaro Otomi           Querétaro Otomi          
-pl      ltr Polish                    Polski                   
+ga       ltr Irish                     Gaeilge                  
+gu       ltr Gujarati                  ગુજરાતી                  
+he       rtl Hebrew                    עברית                    
+hi       ltr Hindi                     हिंदी                    
+hr       ltr Croatian                  Hrvatski                 
+ht       ltr Haitian Creole            Haitian Creole           
+hu       ltr Hungarian                 Magyar                   
+id       ltr Indonesian                Indonesia                
+is       ltr Icelandic                 Íslenska                 
+it       ltr Italian                   Italiano                 
+ja       ltr Japanese                  日本語                      
+kk       ltr Kazakh                    Kazakh                   
+kn       ltr Kannada                   ಕನ್ನಡ                    
+ko       ltr Korean                    한국어                      
+lt       ltr Lithuanian                Lietuvių                 
+lv       ltr Latvian                   Latviešu                 
+mg       ltr Malagasy                  Malagasy                 
+mi       ltr Maori                     Māori                    
+ml       ltr Malayalam                 മലയാളം                   
+mr       ltr Marathi                   मराठी                    
 
 Press Enter to continue: 
 
-pt      ltr Portuguese                Português                
-ro      ltr Romanian                  Română                   
-ru      ltr Russian                   Русский                  
-sk      ltr Slovak                    Slovenčina               
-sl      ltr Slovenian                 Slovenščina              
-sm      ltr Samoan                    Samoan                   
-sr-Cyrl ltr Serbian (Cyrillic)        srpski (ćirilica)        
-sr-Latn ltr Serbian (Latin)           srpski (latinica)        
-sv      ltr Swedish                   Svenska                  
-sw      ltr Kiswahili                 Kiswahili                
-ta      ltr Tamil                     தமிழ்                    
-te      ltr Telugu                    తెలుగు                   
-th      ltr Thai                      ไทย                      
-tlh     ltr Klingon                   Klingon                  
-to      ltr Tongan                    lea fakatonga            
-tr      ltr Turkish                   Türkçe                   
-ty      ltr Tahitian                  Tahitian                 
-uk      ltr Ukrainian                 Українська               
-ur      rtl Urdu                      اردو                     
-vi      ltr Vietnamese                Tiếng Việt             
+ms       ltr Malay                     Melayu                   
+mt       ltr Maltese                   Il-Malti                 
+mww      ltr Hmong Daw                 Hmong Daw                
+nb       ltr Norwegian                 Norsk                    
+nl       ltr Dutch                     Nederlands               
+otq      ltr Querétaro Otomi           Querétaro Otomi          
+pa       ltr Punjabi                   ਪੰਜਾਬੀ                   
+pl       ltr Polish                    Polski                   
+pt       ltr Portuguese (Brazil)       Português (Brasil)       
+pt-pt    ltr Portuguese (Portugal)     Português (Portugal)     
+ro       ltr Romanian                  Română                   
+ru       ltr Russian                   Русский                  
+sk       ltr Slovak                    Slovenčina               
+sl       ltr Slovenian                 Slovenščina              
+sm       ltr Samoan                    Samoan                   
+sr-Cyrl  ltr Serbian (Cyrillic)        srpski (ćirilica)        
+sr-Latn  ltr Serbian (Latin)           srpski (latinica)        
+sv       ltr Swedish                   Svenska                  
+sw       ltr Swahili                   Kiswahili                
+ta       ltr Tamil                     தமிழ்                    
 
 Press Enter to continue: 
 
-yua     ltr Yucatec Maya              Yucatec Maya             
-yue     ltr Cantonese (Traditional)   粵語 (繁體中文)                
-zh-Hans ltr Chinese Simplified        简体中文                     
-zh-Hant ltr Chinese Traditional       繁體中文                     
+te       ltr Telugu                    తెలుగు                   
+th       ltr Thai                      ไทย                      
+tlh-Latn ltr Klingon (Latin)           Klingon (Latin)          
+tlh-Piqd ltr Klingon (pIqaD)           Klingon (pIqaD)          
+to       ltr Tongan                    lea fakatonga            
+tr       ltr Turkish                   Türkçe                   
+ty       ltr Tahitian                  Tahitian                 
+uk       ltr Ukrainian                 Українська               
+ur       rtl Urdu                      اردو                     
+vi       ltr Vietnamese                Tiếng Việt             
+yua      ltr Yucatec Maya              Yucatec Maya             
+yue      ltr Cantonese (Traditional)   粵語 (繁體中文)                
+zh-Hans  ltr Chinese Simplified        简体中文                     
+zh-Hant  ltr Chinese Traditional       繁體中文                     
 
-That's 64 languages in total.
+That's 74 languages in total.
 
 Press Enter to continue on to translations from English: 
 
