@@ -23,6 +23,14 @@ Visit the github repository for more details:
 The Python code is based on the [Azure Text Translator Quick
 Start](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/quickstart-python-translate)
 
+Quickstart
+----------
+
+```console
+$ ml translate aztranslate Hello world
+$ ml languages aztranslate
+```
+
 Usage
 -----
 
