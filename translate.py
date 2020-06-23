@@ -24,6 +24,8 @@ live = True
 # Build the REST API URLs.
 
 base_url = 'https://api.cognitive.microsofttranslator.com'
+#base_url = 'https://translator-for-mlhub.cognitiveservices.azure.com'
+base_url = 'https://australiaeast.api.cognitive.microsoft.com'
 
 path     = '/translate?api-version=3.0'
 translate_url = base_url + path
