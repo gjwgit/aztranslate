@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-
-# Copyright (c) Microsoft Corporation. All rights reserved.
+#
+# Time-stamp: <Tuesday 2020-06-23 13:32:06 AEST Graham Williams>
+#
+# Copyright (c) TogawarePty Ltd. All rights reserved.
 # Licensed under the MIT License.
 # Author: Graham.Williams@togaware.com
 #
@@ -9,10 +11,9 @@
 # https://github.com/MicrosoftTranslator/Text-Translation-API-V3-Python
 #
 
-print("""===========================
-Limitations of Translations
-===========================
+from mlhub.pkg import azkey, azrequest, mlask, mlcat
 
+mlcat("Limitations of Translations", """\
 Douglas Hofstadter, a professor of cognitive science and comparative
 literature at Indiana University at Bloomington and author of the book
 Gödel, Escher, Bach, highlights in a January 2018 article in The
@@ -30,124 +31,99 @@ The original article demonstrated the issue using Google Translator. We
 demonstrate using Azure Translator.
 """)
 
-# Defaults.
-
-KEY_FILE = "private.py"
-
-subscription_key = None
-live = True
-
-# Build the REST API URLs.
-
-base_url = 'https://api.cognitive.microsofttranslator.com'
-
-path     = '/translate?api-version=3.0'
-translate_url = base_url + path
-
-path = '/languages?api-version=3.0'
-languages_url = base_url + path
+# ----------------------------------------------------------------------
+# Setup
+# ----------------------------------------------------------------------
 
 # Import the required libraries.
 
-import sys
 import os
-import requests
+import sys
 import uuid
 import json
+import requests
+
 from textwrap import fill
 
-# Prompt the user for the key and save into private.py for
-# future runs of the model. The contents of that file is:
-#
-# subscription_key = "a14d...ef24"
+# ----------------------------------------------------------------------
+# Request subscription key and location from user.
+# ----------------------------------------------------------------------
 
-key_found = os.path.isfile(KEY_FILE)
+SERVICE   = "Translator"
+KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
 
-if os.path.isfile(KEY_FILE) and os.path.getsize(KEY_FILE) != 0:
-    print("""The following file has been found and is assumed to contain an Azure Text
-Translator subscription key. We will load the file and use this information.
+key, location = azkey(KEY_FILE, SERVICE, connect="location")
 
-    """ + os.getcwd() + "/" + KEY_FILE)
-    exec(open(KEY_FILE).read())
-else:
-    print("""An Azure resource is required to access this service (and to run this
-demo). See the README for details of a free subscription. Then you can
-provide the key and the region information here.
-""")
-#If you don't have a key and want to review the canned examples rather
-#than work with the live examples, you can indeed continue simply by 
-#pressing the Enter key.
-#""")
-    sys.stdout.write("Please enter your Text Analytics subscription key []: ")
-    subscription_key = input()
+mlask(end="\n")
 
-    if len(subscription_key) > 0:
-        assert subscription_key
-        oKEY_FILE = open(KEY_FILE, "w")
-        oKEY_FILE.write("""subscription_key = "{}"
-assert subscription_key
-    """.format(subscription_key))
-        oKEY_FILE.close()
-
-        print("""
-I've saved that information into the file:
-
-""" + os.getcwd() + "/" + KEY_FILE)
+# ----------------------------------------------------------------------
+# Prepare to send requests to the service.
+# ----------------------------------------------------------------------
 
 headers  = {
-    'Ocp-Apim-Subscription-Key': subscription_key,
+    'Ocp-Apim-Subscription-Key': key,
+    'Ocp-Apim-Subscription-Region': location,
     'Content-type': 'application/json',
     'X-ClientTraceId': str(uuid.uuid4())
 }  
 
-sys.stdout.write("""
-Press Enter to continue on to the example: """)
-answer = input()
+endpoint      = 'https://api.cognitive.microsofttranslator.com/'
+path          = '/translate?api-version=3.0'
+translate_url = endpoint + path
 
-print("""
-*** The sample text is:
-""")
+endpoint      = 'https://api.cognitive.microsofttranslator.com/'
+path          = '/languages?api-version=3.0'
+languages_url = endpoint + path
+
+# ----------------------------------------------------------------------
 
 hof_or = [{'text': """In their house, everything comes in pairs. There's his car
 and her car, his towels and her towels, and his library and hers."""}]
 
-sys.stdout.write(fill(hof_or[0]['text']))
+mlcat("Sample Text", hof_or[0]['text'])
 
-sys.stdout.write("""
+params   = '&to=fr'
+request = requests.post(translate_url + params, headers=headers, json=hof_or)
+hof_fr = request.json()
 
-*** The French translation is:
+mlask(begin="\n", end="\n")
 
+mlcat("French Translation", hof_fr[0]['translations'][0]['text'])
+
+mlask(begin="\n", end="\n")
+
+# ----------------------------------------------------------------------
+
+mlcat("Translating Back to English", """\
+Translating bask to English demonstrates the shallow understanding
+of the actual text. The machine learning model does not really 
+understand the text and through the understanding is able to translate 
+accurately. In fact, the model has a superficial understanding which
+results in some mis-understanding.
 """)
 
-if live:
-    params   = '&to=fr'
-    request = requests.post(translate_url + params, headers=headers, json=hof_or)
-    hof_fr = request.json()
+params   = '&to=en'
+request = requests.post(translate_url + params,
+                        headers=headers,
+                        json=hof_fr[0]['translations'])
+hof_en = request.json()
 
-sys.stdout.write(fill(hof_fr[0]['translations'][0]['text']))
-
-sys.stdout.write("""
-
-*** Translating back to English demonstrates a shallow understanding:
-
-""")
-
-if live:
-    params   = '&to=en'
-    request = requests.post(translate_url + params, headers=headers, json=hof_fr[0]['translations'])
-    hof_en = request.json()
+mlask(end="\n")
 
 sys.stdout.write(fill(hof_en[0]['translations'][0]['text']))
-print()
 
-# Google had: 
-#
-#     Dans leur maison, tout vient en paires. Il y a sa voiture et sa
-#     voiture, ses serviettes et ses serviettes, sa bibliothèque et
-#     les siennes.
-#
-#     Then
-#
-#     At home, they have everything in double. There is his own car
-#     and his own car, his own towels and his own towels, his own
-#     library and his own library.
+mlask(begin="\n\n", end="\n")
+
+# ----------------------------------------------------------------------
+
+mlcat("Compare to Google Translator", """\
+Dans leur maison, tout vient en paires. Il y a sa voiture et sa
+voiture, ses serviettes et ses serviettes, sa bibliothèque et
+les siennes.
+
+Then
+
+At home, they have everything in double. There is his own car
+and his own car, his own towels and his own towels, his own
+library and his own library.
+""")
