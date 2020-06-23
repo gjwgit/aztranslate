@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Tuesday 2020-06-23 11:54:10 AEST Graham Williams>
+# Time-stamp: <Tuesday 2020-06-23 12:03:55 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd
 # Licensed under the MIT License.
@@ -87,8 +87,7 @@ mlask(end="\n")
 
 mlcat("Text Translation from English", """\
 Below we demonstrate the translation of a variety of common phrases as we might
-find when interacting with a voice command system.
-""")
+find when interacting with a voice command system.""")
 
 utterances = [{ 'text': """\
     Hi Tom, has my parcel arrived yet?
@@ -108,7 +107,7 @@ response = request.json()
 lang  = response[0]['detectedLanguage']
 trans = response[0]['translations']
 
-mlcat("", f"""
+mlcat("", f"""\
 The supplied text was detected as '{lang['language']}' with a 
 score of '{lang['score']}'.""")
 
