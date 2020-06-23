@@ -16,7 +16,9 @@ dependencies:
     - demo.py
     - limits.py
     - translate.py
+    - languages.py
 commands:
   demo      : Demonstrate the functionality of text translator.
   limits    : Discuss limitations of deep learning with shallow AI.
   translate : Use the model to translate user provided text.
+  languages : List the supported languages.
