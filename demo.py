@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Tuesday 2020-06-23 12:03:55 AEST Graham Williams>
+# Time-stamp: <Tuesday 2020-06-23 13:06:48 AEST Graham Williams>
 #
-# Copyright (c) Togaware Pty Ltd
+# Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
 # Author: Graham.Williams@togaware.com
 #
@@ -63,6 +63,8 @@ endpoint      = 'https://api.cognitive.microsofttranslator.com/'
 path          = '/languages?api-version=3.0'
 languages_url = endpoint + path
 
+# ----------------------------------------------------------------------
+
 mlcat("Supported Languages", """\
 These are the languages supported by the Azure Translator for translation.
 """)
@@ -84,6 +86,8 @@ That's {count} languages in total.
 """, begin="\n")
 
 mlask(end="\n")
+
+# ----------------------------------------------------------------------
 
 mlcat("Text Translation from English", """\
 Below we demonstrate the translation of a variety of common phrases as we might
@@ -117,6 +121,8 @@ for t in trans:
     sys.stdout.write(t['text'])
 
 mlask("Press Enter to continue on to translations back to English", begin="\n", end="\n")
+
+# ----------------------------------------------------------------------
 
 mlcat("Translation back to English", """\
 Below we translate each of the above translations back to English. Again the 
