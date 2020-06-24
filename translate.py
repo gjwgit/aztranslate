@@ -86,7 +86,7 @@ translate_url = endpoint + path
 # print()
 text = ""
 if args.path:
-    text = open(args.path, "r").read()
+    text = open(os.path.join(get_cmd_cwd(), args.path), "r").read()
 elif args.sentence:
     text = " ".join(args.sentence)
 # print("text =>", text)
