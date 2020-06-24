@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Tuesday 2020-06-23 20:34:36 AEST Graham Williams>
+# Time-stamp: <Wednesday 2020-06-24 14:34:20 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
 # Author: Graham.Williams@togaware.com
-#
-# Command line tool for translation.
-#
-# ml translate aztranslate --to=fr [--path=<path>] <sentence>
 # 
 # https://github.com/MicrosoftTranslator/Text-Translation-API-V3-Python
+
+
+"""A mlhub command line interface to Azure Translate.
+
+Useage: ml translate aztranslate --to=fr [--path=<path>] [<sentence>]
+"""
 
 # ----------------------------------------------------------------------
 # Setup
@@ -52,6 +54,9 @@ args = option_parser.parse_args()
 
 if args.to is None: args.to = DEFAULT_TO_LANGUAGE
 
+if args.path and args.sentence:
+    option_parser.error("either a path OR sentence allowed but not both.")
+
 # ----------------------------------------------------------------------
 # Request subscription key and location from user.
 # ----------------------------------------------------------------------
@@ -75,11 +80,15 @@ translate_url = endpoint + path
 # Read the text to be translated.
 # ----------------------------------------------------------------------
 
-# print("sentence =>", args.sentence)
-# print("path =>", args.path)
+#print("sentence =>", args.sentence)
+#print("path =>", args.path)
 # print("to =>", args.to)
 # print()
-text = " ".join(args.sentence)
+text = ""
+if args.path:
+    text = open(args.path, "r").read()
+elif args.sentence:
+    text = " ".join(args.sentence)
 # print("text =>", text)
 # print()
 
