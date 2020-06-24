@@ -293,6 +293,22 @@ fr,1.0,en,This is the exception that confirms the rule.
 $ ml translate aztranslate Dimana ada kemauan, di situ ada jalan
 id,1.0,en,Where there is a will, there is a way
 
+$ ml translate aztranslate --to=vi C’est l’exception qui confirme la règle.
+fr,1.0,vi,Đây là ngoại lệ xác nhận quy tắc.
+
+$ ml translate aztranslate --path=mydoc.txt
+zh-Hant,1.0,en,Due to the COVID-19 National Emergency, the EPA is now
+taking action to keep our staff healthy and safe and implement
+contingency plans to ensure that our responsibilities are carried out.
+
+$ ml translate
+穿媽媽的布鞋
+zh-Hant,1.0,en,Wear mom's cloth shoes.
+Un'enciclopedia libera e multilingue.
+it,1.0,en,A free and multilingual encyclopedia.
+उप्र, पंजाब और हरियाणा में मानसून की दस्तक, अन्य राज्यों में कैसा रहेगा मौसम का हाल
+hi,1.0,en,Monsoon knocks in Uttar Pradesh, Punjab and Haryana, what will be the weather situation in other states
+^D
 ```
 
 Limitations of Translations
