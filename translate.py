@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Saturday 2020-06-27 11:05:30 AEST Graham Williams>
+# Time-stamp: <Saturday 2020-06-27 11:14:31 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
@@ -74,7 +74,7 @@ headers  = {
 
 endpoint      = 'https://api.cognitive.microsofttranslator.com/'
 path          = '/translate?api-version=3.0'
-translate_url = endpoint + file
+translate_url = endpoint + path
 
 # ----------------------------------------------------------------------
 # Read the text to be translated.
