@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Saturday 2020-06-27 10:46:44 AEST Graham Williams>
+# Time-stamp: <Saturday 2020-06-27 11:05:30 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
@@ -62,7 +62,7 @@ if args.file and args.sentence:
 # ----------------------------------------------------------------------
 
 SERVICE   = "Translator"
-KEY_FILE  = os.file.join(os.getcwd(), "private.txt")
+KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
 
 key, location = azkey(KEY_FILE, SERVICE, connect="location", verbose=False)
 
@@ -82,7 +82,7 @@ translate_url = endpoint + file
 
 text = ""
 if args.file:
-    text = open(os.file.join(get_cmd_cwd(), args.file), "r").read()
+    text = open(os.path.join(get_cmd_cwd(), args.file), "r").read()
 elif args.sentence:
     text = " ".join(args.sentence)
 
