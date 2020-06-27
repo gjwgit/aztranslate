@@ -70,6 +70,10 @@ of useful command line tools.
 
 *translate*
 
+```console
+$ ml translate aztranslate [--to=] [--file=] [sentence]
+```
+
 The *translate* command allows a sentence to the translated from
 different languages and into The source languages are automatically
 identified. The code *hi* is used for Hindi, *fr* for French, and *id*
@@ -126,7 +130,19 @@ hi,1.0,en,Monsoon knocks in Uttar Pradesh, Punjab and Haryana, what will be the 
 Ctrl-D
 ```
 
+*supported*
+
+```console
+$ ml supported aztranslate
+```
+
+List the supported languages.
+
 *limits*
+
+```console
+$ ml limits aztranslate
+```
 
 Douglas Hofstadter, a professor of cognitive science and comparative
 literature at Indiana University at Bloomington and author of the book
