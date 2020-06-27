@@ -28,8 +28,23 @@ Start](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/quic
 Quickstart
 ----------
 
+Typical
 ```console
-$ ml translate aztranslate Hello world
+$ ml translate aztranslate Selamat pagi
+$ ml translate aztranslate --to fr Selamat pagi
+$ ml translate aztranslate --to fa Please direct me to the restaurant
+$ ml translate aztranslate --to fr Good morning > greeting_fr.txt
+$ ml translate aztranslate --path greeting_fr.txt
+```
+
+Pipelines:
+```console
+$ cat greeting_fr.txt | ml translate aztranslate
+$ ml listen azspeech | ml translate aztranslate --to fr
+```
+
+Support:
+```console
 $ ml supported aztranslate
 $ ml limits aztranslate
 ```
@@ -39,16 +54,16 @@ Usage
 
 - To install mlhub 
 
-        $ pip3 install mlhub
+	$ pip3 install mlhub
 
 - To install and run the pre-built model:
 
-		$ ml install   aztranslate
-		$ ml configure aztranslate
-		$ ml demo      aztranslate
-		$ ml translate aztranslate --to=fr Goodbye
-		$ ml languages aztranslate
-		$ ml limits    aztranslate
+	$ ml install   aztranslate
+	$ ml configure aztranslate
+	$ ml demo      aztranslate
+	$ ml translate aztranslate --to=fr Goodbye
+	$ ml languages aztranslate
+	$ ml limits    aztranslate
 
 Demonstration
 -------------
