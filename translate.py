@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Wednesday 2020-06-24 14:34:20 AEST Graham Williams>
+# Time-stamp: <Saturday 2020-06-27 10:46:44 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
@@ -11,7 +11,7 @@
 
 """A mlhub command line interface to Azure Translate.
 
-Useage: ml translate aztranslate --to=fr [--path=<path>] [<sentence>]
+Useage: ml translate aztranslate --to=fr [--file=<file>] [<sentence>]
 """
 
 # ----------------------------------------------------------------------
@@ -43,7 +43,7 @@ option_parser.add_argument(
     help='text to translate')
 
 option_parser.add_argument(
-    '--path', '-p',
+    '--file', '-f',
     help='path to a text file')
 
 option_parser.add_argument(
@@ -54,15 +54,15 @@ args = option_parser.parse_args()
 
 if args.to is None: args.to = DEFAULT_TO_LANGUAGE
 
-if args.path and args.sentence:
-    option_parser.error("either a path OR sentence allowed but not both.")
+if args.file and args.sentence:
+    option_parser.error("either a file OR sentence allowed but not both.")
 
 # ----------------------------------------------------------------------
 # Request subscription key and location from user.
 # ----------------------------------------------------------------------
 
 SERVICE   = "Translator"
-KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+KEY_FILE  = os.file.join(os.getcwd(), "private.txt")
 
 key, location = azkey(KEY_FILE, SERVICE, connect="location", verbose=False)
 
@@ -74,23 +74,17 @@ headers  = {
 
 endpoint      = 'https://api.cognitive.microsofttranslator.com/'
 path          = '/translate?api-version=3.0'
-translate_url = endpoint + path
+translate_url = endpoint + file
 
 # ----------------------------------------------------------------------
 # Read the text to be translated.
 # ----------------------------------------------------------------------
 
-#print("sentence =>", args.sentence)
-#print("path =>", args.path)
-# print("to =>", args.to)
-# print()
 text = ""
-if args.path:
-    text = open(os.path.join(get_cmd_cwd(), args.path), "r").read()
+if args.file:
+    text = open(os.file.join(get_cmd_cwd(), args.file), "r").read()
 elif args.sentence:
     text = " ".join(args.sentence)
-# print("text =>", text)
-# print()
 
 # ----------------------------------------------------------------------
 # Support function to translate the text.
