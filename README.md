@@ -68,8 +68,7 @@ Interactive Use
 
 We can interact with the model simply. Here we enter a few texts in
 different languages and have them translated into English. Note the
-variability of the competency of the translation. Translation from the
-Indonesian language is not as well developed as other languages!
+variability of the competency of the translation.
 
 ```console
 $ ml translate aztranslate सभी मनुष्यों को गौरव और अधिकारों के मामले में जन्मजात स्वतन्त्रता और समानता प्राप्त है। उन्हें बुद्धि और अन्तरात्मा की देन प्राप्त है और परस्पर उन्हें भाईचारे के भाव से बर्ताव करना चाहिये।
@@ -80,23 +79,47 @@ fr,1.0,en,This is the exception that confirms the rule.
 
 $ ml translate aztranslate Dimana ada kemauan, di situ ada jalan
 id,1.0,en,Where there is a will, there is a way
+```
 
+We can translate from other languages (the language can often be
+automatically identified), as in the example here translating from
+French (identified as being French with 100% probability, i.e., 1.0),
+to Vietnamese using the option *--to=vi*. The *vi* is the standard
+code for Vietnamese and *fr* for French.
+
+```console
 $ ml translate aztranslate --to=vi C’est l’exception qui confirme la règle.
 fr,1.0,vi,Đây là ngoại lệ xác nhận quy tắc.
+```
 
+If the text to be translated is in a file then request the file to be
+translated. The output always begins with the identified language, the
+certainty of that identification, the language translated to and then
+the translation, over multiple lines.
+
+```console
 $ ml translate aztranslate --file=mydoc.txt
 zh-Hant,1.0,en,Due to the COVID-19 National Emergency, the EPA is now
 taking action to keep our staff healthy and safe and implement
 contingency plans to ensure that our responsibilities are carried out.
+```
 
+If no arguments are supplied then an interactive loop is activated, so
+simply enter text. It is sent off for translation when you press
+Enter. Finish with Control-D.
+
+```console
 $ ml translate aztranslate
 穿媽媽的布鞋
 zh-Hant,1.0,en,Wear mom's cloth shoes.
+
 Un'enciclopedia libera e multilingue.
 it,1.0,en,A free and multilingual encyclopedia.
+
 उप्र, पंजाब और हरियाणा में मानसून की दस्तक, अन्य राज्यों में कैसा रहेगा मौसम का हाल
 hi,1.0,en,Monsoon knocks in Uttar Pradesh, Punjab and Haryana, what will be the weather situation in other states
-^D
+
+Ctrl-D
 ```
 
 Limitations of Translations
