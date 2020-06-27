@@ -54,13 +54,13 @@ Usage
 
 - To install mlhub 
 
-	$ pip3 install mlhub
+		$ pip3 install mlhub
 
 - To install and demo the pre-built model:
 
-	$ ml install   aztranslate
-	$ ml configure aztranslate
-	$ ml demo      aztranslate
+		$ ml install   aztranslate
+		$ ml configure aztranslate
+		$ ml demo      aztranslate
 
 
 Interactive Use
