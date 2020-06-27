@@ -28,13 +28,13 @@ Start](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/quic
 Quickstart
 ----------
 
-Typical
+Typical:
 ```console
 $ ml translate aztranslate Selamat pagi
 $ ml translate aztranslate --to fr Selamat pagi
 $ ml translate aztranslate --to fa Please direct me to the restaurant
 $ ml translate aztranslate --to fr Good morning > greeting_fr.txt
-$ ml translate aztranslate --path greeting_fr.txt
+$ ml translate aztranslate --file greeting_fr.txt
 ```
 
 Pipelines:
@@ -56,14 +56,86 @@ Usage
 
 	$ pip3 install mlhub
 
-- To install and run the pre-built model:
+- To install and demo the pre-built model:
 
 	$ ml install   aztranslate
 	$ ml configure aztranslate
 	$ ml demo      aztranslate
-	$ ml translate aztranslate --to=fr Goodbye
-	$ ml languages aztranslate
-	$ ml limits    aztranslate
+
+
+Interactive Use
+---------------
+
+We can interact with the model simply. Here we enter a few texts in
+different languages and have them translated into English. Note the
+variability of the competency of the translation. Translation from the
+Indonesian language is not as well developed as other languages!
+
+```console
+$ ml translate aztranslate सभी मनुष्यों को गौरव और अधिकारों के मामले में जन्मजात स्वतन्त्रता और समानता प्राप्त है। उन्हें बुद्धि और अन्तरात्मा की देन प्राप्त है और परस्पर उन्हें भाईचारे के भाव से बर्ताव करना चाहिये।
+hi,1.0,en,All human beings have innate freedom and equality in terms of pride and rights. They have the wisdom and the conscience and they should behave in a sense of brotherhood.
+
+$ ml translate aztranslate C’est l’exception qui confirme la règle.
+fr,1.0,en,This is the exception that confirms the rule.
+
+$ ml translate aztranslate Dimana ada kemauan, di situ ada jalan
+id,1.0,en,Where there is a will, there is a way
+
+$ ml translate aztranslate --to=vi C’est l’exception qui confirme la règle.
+fr,1.0,vi,Đây là ngoại lệ xác nhận quy tắc.
+
+$ ml translate aztranslate --file=mydoc.txt
+zh-Hant,1.0,en,Due to the COVID-19 National Emergency, the EPA is now
+taking action to keep our staff healthy and safe and implement
+contingency plans to ensure that our responsibilities are carried out.
+
+$ ml translate aztranslate
+穿媽媽的布鞋
+zh-Hant,1.0,en,Wear mom's cloth shoes.
+Un'enciclopedia libera e multilingue.
+it,1.0,en,A free and multilingual encyclopedia.
+उप्र, पंजाब और हरियाणा में मानसून की दस्तक, अन्य राज्यों में कैसा रहेगा मौसम का हाल
+hi,1.0,en,Monsoon knocks in Uttar Pradesh, Punjab and Haryana, what will be the weather situation in other states
+^D
+```
+
+Limitations of Translations
+---------------------------
+
+Douglas Hofstadter, a professor of cognitive science and comparative
+literature at Indiana University at Bloomington and author of the book
+Gödel, Escher, Bach, highlights in a January 2018 article in The
+Atlantic the limitations of automated language translation. To
+paraphrase, the translators do not have any deep understanding of the
+text but have developed a shallower mechanical process to do a decent job
+for simple communications.
+
+Below we illustrate with one of Hofstadter's examples which you can
+replicate with the LIMITS command. See the original article for
+details:
+
+https://www.theatlantic.com/technology/archive/2018/01/the-shallowness-of-google-translate/551570/
+
+```console
+$ ml limits aztranslate
+
+[...]
+
+*** Consider this sample text:
+
+In their house, everything comes in pairs. There's his car and her
+car, his towels and her towels, and his library and hers.
+
+*** The French translation is:
+
+Dans leur maison, tout se passe par paires. Il y a sa voiture, sa
+voiture, ses serviettes, ses serviettes, sa bibliothèque et la sienne.
+
+*** Translating back to English demonstrates a shallow understanding:
+
+In their House, everything happens in pairs. There's his car, his car,
+his towels, his towels, his library and hers.
+```
 
 Demonstration
 -------------
@@ -290,77 +362,5 @@ To use the model to translate user provided text:
   $ ml translate aztranslate
 ```
 
-Interactive Use
----------------
-
-We can interact with the model simply. Here we enter a few texts in
-different languages and have them translated into English. Note the
-variability of the competency of the translation. Translation from the
-Indonesian language is not as well developed as other languages!
-
-```console
-$ ml translate aztranslate सभी मनुष्यों को गौरव और अधिकारों के मामले में जन्मजात स्वतन्त्रता और समानता प्राप्त है। उन्हें बुद्धि और अन्तरात्मा की देन प्राप्त है और परस्पर उन्हें भाईचारे के भाव से बर्ताव करना चाहिये।
-hi,1.0,en,All human beings have innate freedom and equality in terms of pride and rights. They have the wisdom and the conscience and they should behave in a sense of brotherhood.
-
-$ ml translate aztranslate C’est l’exception qui confirme la règle.
-fr,1.0,en,This is the exception that confirms the rule.
-
-$ ml translate aztranslate Dimana ada kemauan, di situ ada jalan
-id,1.0,en,Where there is a will, there is a way
-
-$ ml translate aztranslate --to=vi C’est l’exception qui confirme la règle.
-fr,1.0,vi,Đây là ngoại lệ xác nhận quy tắc.
-
-$ ml translate aztranslate --path=mydoc.txt
-zh-Hant,1.0,en,Due to the COVID-19 National Emergency, the EPA is now
-taking action to keep our staff healthy and safe and implement
-contingency plans to ensure that our responsibilities are carried out.
-
-$ ml translate
-穿媽媽的布鞋
-zh-Hant,1.0,en,Wear mom's cloth shoes.
-Un'enciclopedia libera e multilingue.
-it,1.0,en,A free and multilingual encyclopedia.
-उप्र, पंजाब और हरियाणा में मानसून की दस्तक, अन्य राज्यों में कैसा रहेगा मौसम का हाल
-hi,1.0,en,Monsoon knocks in Uttar Pradesh, Punjab and Haryana, what will be the weather situation in other states
-^D
-```
-
-Limitations of Translations
----------------------------
-
-Douglas Hofstadter, a professor of cognitive science and comparative
-literature at Indiana University at Bloomington and author of the book
-Gödel, Escher, Bach, highlights in a January 2018 article in The
-Atlantic the limitations of automated language translation. To
-paraphrase, the translators do not have any deep understanding of the
-text but have developed a shallower mechanical process to do a decent job
-for simple communications.
-
-Below we illustrate with one of Hofstadter's examples which you can
-replicate with the LIMITS command. See the original article for
-details:
-
-https://www.theatlantic.com/technology/archive/2018/01/the-shallowness-of-google-translate/551570/
-
-```console
-$ ml limits aztranslate
-
-[...]
-
-*** Consider this sample text:
-
-In their house, everything comes in pairs. There's his car and her
-car, his towels and her towels, and his library and hers.
-
-*** The French translation is:
-
-Dans leur maison, tout se passe par paires. Il y a sa voiture, sa
-voiture, ses serviettes, ses serviettes, sa bibliothèque et la sienne.
-
-*** Translating back to English demonstrates a shallow understanding:
-
-In their House, everything happens in pairs. There's his car, his car,
-his towels, his towels, his library and hers.
-```
-
+Resources
+---------
