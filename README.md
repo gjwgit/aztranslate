@@ -22,11 +22,10 @@ freedoms and has no guarantee of ongoing availability.
 Visit the github repository for more details:
 <https://github.com/gjwgit/aztranslate>
 
-The Python code is based on the [Azure Text Translator Quick
-Start](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/quickstart-python-translate)
 
-Quickstart
-----------
+
+Quick Start
+-----------
 
 Typical:
 ```console
@@ -63,12 +62,18 @@ Usage
 		$ ml demo      aztranslate
 
 
-Interactive Use
----------------
+Command Line Tools
+------------------
 
-We can interact with the model simply. Here we enter a few texts in
-different languages and have them translated into English. Note the
-variability of the competency of the translation.
+In addition to the *demo* command below, the package provides a number
+of useful command line tools.
+
+*translate*
+
+The *translate* command allows a sentence to the translated from
+different languages and into The source languages are automatically
+identified. The code *hi* is used for Hindi, *fr* for French, and *id*
+for Indonesian.
 
 ```console
 $ ml translate aztranslate सभी मनुष्यों को गौरव और अधिकारों के मामले में जन्मजात स्वतन्त्रता और समानता प्राप्त है। उन्हें बुद्धि और अन्तरात्मा की देन प्राप्त है और परस्पर उन्हें भाईचारे के भाव से बर्ताव करना चाहिये।
@@ -81,11 +86,10 @@ $ ml translate aztranslate Dimana ada kemauan, di situ ada jalan
 id,1.0,en,Where there is a will, there is a way
 ```
 
-We can translate from other languages (the language can often be
-automatically identified), as in the example here translating from
-French (identified as being French with 100% probability, i.e., 1.0),
-to Vietnamese using the option *--to=vi*. The *vi* is the standard
-code for Vietnamese and *fr* for French.
+We can translate to other languages, as in the example here
+translating from French (identified as being French with 100%
+probability, i.e., 1.0), to Vietnamese using the option *--to=vi*. The
+*vi* is the standard code for Vietnamese and *fr* for French.
 
 ```console
 $ ml translate aztranslate --to=vi C’est l’exception qui confirme la règle.
@@ -122,8 +126,7 @@ hi,1.0,en,Monsoon knocks in Uttar Pradesh, Punjab and Haryana, what will be the 
 Ctrl-D
 ```
 
-Limitations of Translations
----------------------------
+*limits*
 
 Douglas Hofstadter, a professor of cognitive science and comparative
 literature at Indiana University at Bloomington and author of the book
@@ -160,11 +163,11 @@ In their House, everything happens in pairs. There's his car, his car,
 his towels, his towels, his library and hers.
 ```
 
-Demonstration
--------------
+*demo*
 
 ```console
 $ ml demo aztranslate
+
 ======================
 Azure Text Translation
 ======================
@@ -387,3 +390,6 @@ To use the model to translate user provided text:
 
 Resources
 ---------
+
+* The Python code is based on the [Azure Text Translator Quick
+  Start](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/quickstart-python-translate)
