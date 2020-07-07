@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Tuesday 2020-06-23 17:07:07 AEST Graham Williams>
+# Time-stamp: <Tuesday 2020-07-07 16:26:05 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
@@ -41,7 +41,7 @@ KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
 
 key, location = azkey(KEY_FILE, SERVICE, connect="location")
 
-mlask(end="\n")
+mlask(True)
 
 # ----------------------------------------------------------------------
 # Prepare to send requests to the service.
@@ -74,7 +74,7 @@ translations = response['translation']
 count = 1 # For lines per page.
 for l in translations:
     if count%20 == 0:
-        mlask(begin="\n", end="\n")
+        mlask(True, True)
     t = translations[l]
     print(f"{l:8} {t['dir']} {t['name']:25} {t['nativeName']:25}")
     count += 1
@@ -83,7 +83,7 @@ mlcat("", f"""\
 That's {count} languages in total.
 """, begin="\n")
 
-mlask(end="\n")
+mlask(True)
 
 # ----------------------------------------------------------------------
 
@@ -114,11 +114,11 @@ The supplied text was detected as '{lang['language']}' with a
 score of '{lang['score']}'.""")
 
 for t in trans:
-    mlask(f"Press Enter for a translation to {translations[t['to']]['name']}",
-          begin="\n", end="\n")
+    mlask(True, True,
+          f"Press Enter for a translation to {translations[t['to']]['name']}")
     sys.stdout.write(t['text'])
 
-mlask("Press Enter to continue on to translations back to English", begin="\n", end="\n")
+mlask(True, True, "Press Enter to continue on to translations back to English")
 
 # ----------------------------------------------------------------------
 
@@ -138,9 +138,10 @@ reverse = request.json()
 for t in reverse:
     lang  = t['detectedLanguage']
     trans = t['translations']
-    mlask(f"Press Enter for the translation from " +
+    mlask(True, True,
+          f"Press Enter for the translation from " +
           f"{translations[lang['language']]['name']} " +
-          f"(language id score={lang['score']})", begin="\n", end="\n")
+          f"(language id score={lang['score']})")
     sys.stdout.write(trans[0]['text'])
 
 print()
