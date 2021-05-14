@@ -110,7 +110,6 @@ print("\n" + utterances[0]['text'])
 params   = '&to=de&to=it&to=fr&to=id&to=hi&to=ar&to=th&to=zh-Hant'
 request = requests.post(translate_url + params, headers=headers, json=utterances)
 response = request.json()
-print(response)
 
 lang  = response[0]['detectedLanguage']
 trans = response[0]['translations']
