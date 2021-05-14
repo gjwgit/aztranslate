@@ -20,6 +20,7 @@ through Azure's Cognitive Services. This service translates text between
 multiple languages.
 """)
 
+mlask()
 # ----------------------------------------------------------------------
 # Setup
 # ----------------------------------------------------------------------
@@ -40,6 +41,7 @@ from textwrap import fill
 PRIVATE_FILE = "private.json"
 
 path = os.path.join(os.getcwd(), PRIVATE_FILE)
+path = os.path.join("/Users/Jingjing/.mlhub/aztranslate", PRIVATE_FILE)
 
 private_dic = get_private(path, "aztranslate")
 
@@ -109,6 +111,7 @@ print("\n" + utterances[0]['text'])
 params   = '&to=de&to=it&to=fr&to=id&to=hi&to=ar&to=th&to=zh-Hant'
 request = requests.post(translate_url + params, headers=headers, json=utterances)
 response = request.json()
+print(response)
 
 lang  = response[0]['detectedLanguage']
 trans = response[0]['translations']
