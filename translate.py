@@ -28,8 +28,7 @@ import json
 import argparse
 import requests
 
-from mlhub.pkg import azkey, is_url
-from mlhub.utils import get_cmd_cwd
+from mlhub.utils import get_cmd_cwd, get_private
 
 # ----------------------------------------------------------------------
 # Parse command line arguments
@@ -61,10 +60,15 @@ if args.file and args.sentence:
 # Request subscription key and location from user.
 # ----------------------------------------------------------------------
 
-SERVICE   = "Translator"
-KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+PRIVATE_FILE = "private.json"
 
-key, location = azkey(KEY_FILE, SERVICE, connect="location", verbose=False)
+path = os.path.join(os.getcwd(), PRIVATE_FILE)
+
+private_dic = get_private(path, "aztranslate")
+
+key = private_dic["Translator"]["key"]
+
+location = private_dic["Translator"]["location"]
 
 headers  = {
     'Ocp-Apim-Subscription-Key': key,

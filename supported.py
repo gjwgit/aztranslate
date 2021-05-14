@@ -24,16 +24,21 @@ import sys
 import json
 import requests
 
-from mlhub.pkg import azkey
+from mlhub.utils import get_private
 
 # ----------------------------------------------------------------------
 # Request subscription key and location from user.
 # ----------------------------------------------------------------------
 
-SERVICE   = "Translator"
-KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+PRIVATE_FILE = "private.json"
 
-key, location = azkey(KEY_FILE, SERVICE, connect="location", verbose=False)
+path = os.path.join(os.getcwd(), PRIVATE_FILE)
+
+private_dic = get_private(path, "aztranslate")
+
+key = private_dic["Translator"]["key"]
+
+location = private_dic["Translator"]["location"]
 
 headers  = {
     'Ocp-Apim-Subscription-Key': key,
