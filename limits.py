@@ -32,7 +32,7 @@ The original article demonstrated the issue using Google Translator. We
 demonstrate using Azure Translator.
 """)
 
-mlask()
+mlask(end='\n')
 # ----------------------------------------------------------------------
 # Setup
 # ----------------------------------------------------------------------

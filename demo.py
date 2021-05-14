@@ -20,7 +20,7 @@ through Azure's Cognitive Services. This service translates text between
 multiple languages.
 """)
 
-mlask()
+mlask(end='\n')
 # ----------------------------------------------------------------------
 # Setup
 # ----------------------------------------------------------------------
