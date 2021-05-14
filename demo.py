@@ -41,7 +41,6 @@ from textwrap import fill
 PRIVATE_FILE = "private.json"
 
 path = os.path.join(os.getcwd(), PRIVATE_FILE)
-path = os.path.join("/Users/Jingjing/.mlhub/aztranslate", PRIVATE_FILE)
 
 private_dic = get_private(path, "aztranslate")
 
