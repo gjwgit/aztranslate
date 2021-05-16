@@ -39,7 +39,7 @@ $ ml translate aztranslate --file greeting_fr.txt
 Pipelines:
 ```console
 $ cat greeting_fr.txt | ml translate aztranslate
-$ ml listen azspeech | ml translate aztranslate --to fr
+$ ml transcribe azspeech | ml translate aztranslate --to fr
 ```
 
 Support:
