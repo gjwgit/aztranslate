@@ -11,7 +11,8 @@
 # https://github.com/MicrosoftTranslator/Text-Translation-API-V3-Python
 #
 
-from mlhub.pkg import azkey, azrequest, mlask, mlcat
+from mlhub.pkg import mlask, mlcat
+from mlhub.utils import get_private
 
 mlcat("Limitations of Translations", """\
 Douglas Hofstadter, a professor of cognitive science and comparative
@@ -31,6 +32,7 @@ The original article demonstrated the issue using Google Translator. We
 demonstrate using Azure Translator.
 """)
 
+mlask(end='\n')
 # ----------------------------------------------------------------------
 # Setup
 # ----------------------------------------------------------------------
@@ -47,13 +49,15 @@ from textwrap import fill
 # ----------------------------------------------------------------------
 # Request subscription key and location from user.
 # ----------------------------------------------------------------------
+PRIVATE_FILE = "private.json"
 
-SERVICE   = "Translator"
-KEY_FILE  = os.path.join(os.getcwd(), "private.txt")
+path = os.path.join(os.getcwd(), PRIVATE_FILE)
 
-key, location = azkey(KEY_FILE, SERVICE, connect="location")
+private_dic = get_private(path, "aztranslate")
 
-mlask(end="\n")
+key = private_dic["Translator"]["key"]
+
+location = private_dic["Translator"]["location"]
 
 # ----------------------------------------------------------------------
 # Prepare to send requests to the service.

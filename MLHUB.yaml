@@ -6,12 +6,14 @@ meta:
   version      : 2.4.6
   languages    : py
   license      : mit
+  private      :
+    Translator : key*, location
+
   author       : Graham.Williams@togaware.com
   url          : https://github.com/gjwgit/aztranslate
 dependencies:
   pip3: requests
   files:
-    - https://mlhub.ai/empty.txt: private.txt
     - README.md
     - demo.py
     - limits.py
