@@ -12,7 +12,7 @@
 #
 
 from mlhub.pkg import mlask, mlcat
-from mlhub.utils import get_private
+from utils import request_priv_info
 
 mlcat("Azure Text Translation", """\
 Welcome to a demo of the pre-built models for Text Translation provided
@@ -27,26 +27,14 @@ mlask(end='\n')
 
 # Import the required libraries.
 
-import os
 import sys
-import json
 import requests
-
-from textwrap import fill
 
 # ----------------------------------------------------------------------
 # Request subscription key and location from user.
 # ----------------------------------------------------------------------
 
-PRIVATE_FILE = "private.json"
-
-path = os.path.join(os.getcwd(), PRIVATE_FILE)
-
-private_dic = get_private(path, "aztranslate")
-
-key = private_dic["Translator"]["key"]
-
-location = private_dic["Translator"]["location"]
+key, location = request_priv_info()
 
 # ----------------------------------------------------------------------
 # Prepare to send requests to the service.
