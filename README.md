@@ -74,7 +74,7 @@ of useful command line tools.
 $ ml translate aztranslate [--to=] [--file=] [sentence]
 ```
 
-The *translate* command allows a sentence to the translated from
+The *translate* command allows a sentence to be translated from
 different languages and into The source languages are automatically
 identified. The code *hi* is used for Hindi, *fr* for French, and *id*
 for Indonesian.
