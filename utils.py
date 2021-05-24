@@ -11,9 +11,8 @@ def request_priv_info():
 
     path = os.path.join(os.getcwd(), PRIVATE_FILE)
 
-    private_dic = get_private(path, "aztranslate")
+    values = get_private(path, "aztranslate", "Translator")
 
-    subscription_key = private_dic["Translator"]["key"]
+    subscription_key, location = values
 
-    endpoint = private_dic["Translator"]["location"]
-    return subscription_key, endpoint
+    return subscription_key, location
