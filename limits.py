@@ -11,8 +11,7 @@
 # https://github.com/MicrosoftTranslator/Text-Translation-API-V3-Python
 #
 
-from mlhub.pkg import mlask, mlcat
-from utils import request_priv_info
+from mlhub.pkg import mlask, mlcat, get_private
 
 mlcat("Limitations of Translations", """\
 Douglas Hofstadter, a professor of cognitive science and comparative
@@ -47,7 +46,7 @@ from textwrap import fill
 # ----------------------------------------------------------------------
 # Request subscription key and location from user.
 # ----------------------------------------------------------------------
-key, location = request_priv_info()
+key, location = get_private()
 
 # ----------------------------------------------------------------------
 # Prepare to send requests to the service.
