@@ -27,7 +27,7 @@ import sys
 import argparse
 import requests
 
-from utils import request_priv_info
+from mlhub.pkg import get_private
 
 # ----------------------------------------------------------------------
 # Parse command line arguments
@@ -59,7 +59,7 @@ if args.file and args.sentence:
 # Request subscription key and location from user.
 # ----------------------------------------------------------------------
 
-key, location = request_priv_info()
+key, location = get_private()
 
 headers  = {
     'Ocp-Apim-Subscription-Key': key,

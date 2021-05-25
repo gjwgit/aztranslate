@@ -19,7 +19,6 @@ dependencies:
     - limits.py
     - translate.py
     - supported.py
-    - utils.py
 commands:
   demo      : Demonstrate the functionality of text translator.
   translate : Translate text on command line or in file or stdin.

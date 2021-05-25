@@ -11,8 +11,7 @@
 # https://github.com/MicrosoftTranslator/Text-Translation-API-V3-Python
 #
 
-from mlhub.pkg import mlask, mlcat
-from utils import request_priv_info
+from mlhub.pkg import mlask, mlcat, get_private
 
 mlcat("Azure Text Translation", """\
 Welcome to a demo of the pre-built models for Text Translation provided
@@ -34,7 +33,7 @@ import requests
 # Request subscription key and location from user.
 # ----------------------------------------------------------------------
 
-key, location = request_priv_info()
+key, location = get_private()
 
 # ----------------------------------------------------------------------
 # Prepare to send requests to the service.
