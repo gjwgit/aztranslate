@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Time-stamp: <Saturday 2020-06-27 11:14:31 AEST Graham Williams>
+# Time-stamp: <Saturday 2021-05-29 21:09:52 AEST Graham Williams>
 #
 # Copyright (c) Togaware Pty Ltd. All rights reserved.
 # Licensed under the MIT License.
@@ -11,7 +11,7 @@
 
 """A mlhub command line interface to Azure Translate.
 
-Useage: ml translate aztranslate --to=fr [--file=<file>] [<sentence>]
+Useage: ml translate aztranslate --to=fr [--input=<file>] [<sentence>]
 """
 
 # ----------------------------------------------------------------------
@@ -27,7 +27,7 @@ import sys
 import argparse
 import requests
 
-from mlhub.pkg import get_private
+from mlhub.pkg import get_private, get_cmd_cwd
 
 # ----------------------------------------------------------------------
 # Parse command line arguments
@@ -41,8 +41,8 @@ option_parser.add_argument(
     help='text to translate')
 
 option_parser.add_argument(
-    '--file', '-f',
-    help='path to a text file')
+    '--input', '-i',
+    help='path to a text file for input')
 
 option_parser.add_argument(
     '--to', "-t",
@@ -52,7 +52,7 @@ args = option_parser.parse_args()
 
 if args.to is None: args.to = DEFAULT_TO_LANGUAGE
 
-if args.file and args.sentence:
+if args.input and args.sentence:
     option_parser.error("either a file OR sentence allowed but not both.")
 
 # ----------------------------------------------------------------------
@@ -76,8 +76,8 @@ translate_url = endpoint + path
 # ----------------------------------------------------------------------
 
 text = ""
-if args.file:
-    text = open(os.path.join(get_cmd_cwd(), args.file), "r").read()
+if args.input:
+    text = open(os.path.join(get_cmd_cwd(), args.input), "r").read()
 elif args.sentence:
     text = " ".join(args.sentence)
 
